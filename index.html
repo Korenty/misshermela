@@ -1,85 +1,391 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="en" class="antialiased overflow-x-hidden bg-[#0B0B0B]">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hermela | Digital Home</title>
-  
-  <!-- Google Fonts: Cinzel Decorative & Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  
-  <!-- Tailwind CSS Play CDN (Enables full styling instantly on mobile/GitHub Pages without a compiler) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            gallery: {
-              alabaster: '#F6F5F0', 
-              charcoal:  '#121110', 
-              cashmere:  '#ECEAE1', 
-              bronze:    '#A38F78', 
-            },
-            abyssal: {
-              void:      '#09090B', 
-              offwhite:  '#E4E4E7', 
-              structure: '#18181B', 
-              oxidized:  '#8C7A6B', 
-            }
-          },
-          fontFamily: {
-            display: ['"Cinzel Decorative"', 'serif'],
-            sans: ['Inter', 'sans-serif'], 
-          },
-          letterSpacing: {
-            widest: '.2em', 
-          }
-        }
-      }
-    }
-  </script>
-</head>
-<body class="bg-gallery-alabaster text-gallery-charcoal dark:bg-abyssal-void dark:text-abyssal-offwhite transition-colors duration-700 antialiased font-sans selection:bg-gallery-bronze selection:text-white dark:selection:bg-abyssal-oxidized">
-
-  <main class="relative min-h-screen flex flex-col justify-between px-6 py-8 md:px-12 md:py-12">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermela | The Intellectual Alchemist</title>
     
-    <!-- TOP NAVIGATION -->
-    <header class="flex justify-between items-center z-10 uppercase tracking-widest text-xs md:text-sm font-medium">
-      <div class="flex gap-8">
-        <a href="index.html" class="border-b border-gallery-charcoal dark:border-abyssal-offwhite pb-1">Home</a>
-        <a href="about.html" class="hover:text-gallery-bronze dark:hover:text-abyssal-oxidized transition-colors">About</a>
-        <a href="projects.html" class="hover:text-gallery-bronze dark:hover:text-abyssal-oxidized transition-colors">Works</a>
-      </div>
-      
-      <button id="theme-toggle" class="hover:text-gallery-bronze dark:hover:text-abyssal-oxidized transition-colors duration-300 focus:outline-none">
-        <span class="dark:hidden">Dark Mode</span>
-        <span class="hidden dark:inline">Light Mode</span>
-      </button>
-    </header>
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (Play CDN for mobile dev flexibility) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        abyssal: {
+                            obsidian: '#0B0B0B',
+                            graphite: '#1A1A1A',
+                            mineral: '#8C7A6B',
+                            offwhite: '#EAEAEA',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Fraunces', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        widest: '.25em',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Core Structural Styles (Non-Tailwind setup) -->
+    <style>
+        /* Smooth Momentum Scrolling Base */
+        html.lenis, html.lenis body {
+            height: auto;
+            width: 100vw;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        .lenis.lenis-smooth [data-scroll-container] {
+            will-change: transform;
+        }
+        
+        /* Custom Utilities */
+        .clip-curtain-closed { clip-path: inset(0 0 100% 0); }
+        .clip-curtain-open { clip-path: inset(0 0 0% 0); }
+        .split-char { display: inline-block; overflow: hidden; vertical-align: bottom; }
+        .split-char-inner { display: inline-block; transform: translateY(100%); will-change: transform; }
+        
+        /* Reduced Motion Fallback */
+        @media (prefers-reduced-motion: reduce) {
+            .split-char-inner { transform: translateY(0) !important; }
+            .clip-curtain-closed { clip-path: inset(0 0 0% 0) !important; display: none; }
+            .clip-curtain-open { display: flex; }
+        }
+    </style>
+</head>
+<body class="bg-abyssal-obsidian text-abyssal-offwhite font-sans selection:bg-abyssal-mineral selection:text-abyssal-obsidian overflow-x-hidden">
 
-    <!-- CENTER PIECE: WORDMARK -->
-    <section class="flex-grow flex flex-col items-center justify-center z-10 text-center">
-      <h1 class="font-display text-5xl md:text-8xl lg:text-[10rem] leading-none">
-        HERMELA
-      </h1>
-      <p class="mt-6 text-sm md:text-base max-w-md opacity-80 tracking-wide font-light">
-        The Polymath of Algorithmic Elegance
-      </p>
-    </section>
+    <!-- COMPONENT: Animated Film Grain Overlay -->
+    <!-- Cinematic acoustic scale translation into visual texture -->
+    <div id="noise-overlay" class="fixed inset-0 z-50 pointer-events-none opacity-[0.04] mix-blend-overlay">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+            <filter id="noiseFilter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
+            </filter>
+            <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
+        </svg>
+    </div>
 
-    <!-- BOTTOM ANCHOR -->
-    <footer class="flex justify-center z-10">
-      <a href="about.html" class="text-xs tracking-widest uppercase animate-pulse hover:text-gallery-bronze transition-colors">
-        Scroll to Explore
-      </a>
-    </footer>
+    <!-- COMPONENT: Hybrid Kinetic Navigation -->
+    <nav id="kinetic-nav" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 transition-transform duration-500 ease-out" data-nav-container>
+        <div class="bg-abyssal-graphite/80 backdrop-blur-md border border-abyssal-offwhite/10 rounded-full px-6 py-3 flex items-center gap-6 shadow-2xl">
+            <span class="text-xs uppercase tracking-widest font-medium opacity-80">Est. 2026</span>
+            <div class="w-px h-4 bg-abyssal-offwhite/20"></div>
+            <button data-menu-trigger data-cursor-magnetic class="text-xs uppercase tracking-widest font-medium hover:text-abyssal-mineral transition-colors">
+                Explore
+            </button>
+        </div>
+    </nav>
 
-  </main>
+    <!-- COMPONENT: Fullscreen Curtain Menu -->
+    <div id="fullscreen-menu" class="fixed inset-0 z-50 bg-abyssal-graphite flex flex-col justify-center items-center clip-curtain-closed transition-all duration-700 ease-[cubic-bezier(0.77,0,0.175,1)]">
+        <button data-menu-close class="absolute top-8 right-8 text-xs uppercase tracking-widest hover:text-abyssal-mineral">Close [X]</button>
+        <ul class="flex flex-col gap-8 text-center">
+            <li><a href="index.html" class="font-display text-4xl md:text-6xl hover:italic transition-all">Prologue</a></li>
+            <li><a href="about.html" class="font-display text-4xl md:text-6xl hover:italic transition-all">The Biome</a></li>
+            <li><a href="pageantry.html" class="font-display text-4xl md:text-6xl hover:italic transition-all">The Crown</a></li>
+            <li><a href="intellect.html" class="font-display text-4xl md:text-6xl hover:italic transition-all">The Architect</a></li>
+            <li><a href="philosophy.html" class="font-display text-4xl md:text-6xl hover:italic transition-all">The Mind</a></li>
+            <li><a href="gallery.html" class="font-display text-4xl md:text-6xl hover:italic transition-all">The Muse</a></li>
+            <li><a href="contact.html" class="font-display text-4xl md:text-6xl hover:italic transition-all">The Connect</a></li>
+        </ul>
+    </div>
 
-  <script src="app.js"></script>
+    <!-- MAIN SCROLL CONTAINER -->
+    <main id="smooth-wrapper" data-scroll-container>
+        
+        <!-- COMPONENT: Parallax Hero -->
+        <header id="hero-section" class="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+            <!-- Background Layer (Slower Parallax) -->
+            <div class="absolute inset-0 z-0" data-parallax-bg>
+                <img src="https://images.unsplash.com/photo-1588513706482-10870c230e15?q=80&w=2000&auto=format&fit=crop" alt="Hermela - High Fashion Aesthetic" class="w-full h-[120%] object-cover object-top opacity-30 scale-105" />
+                <div class="absolute inset-0 bg-gradient-to-t from-abyssal-obsidian via-abyssal-obsidian/50 to-transparent"></div>
+            </div>
+
+            <!-- Foreground Content Layer -->
+            <div class="relative z-10 flex flex-col items-center text-center px-6">
+                <span class="text-xs md:text-sm uppercase tracking-widest opacity-70 mb-6 font-light" data-split-text>The Intellectual Alchemist</span>
+                <h1 class="font-display text-5xl md:text-8xl lg:text-[11rem] leading-none tracking-tight uppercase" data-split-text>
+                    Hermela
+                </h1>
+                <p class="mt-8 text-sm md:text-base max-w-lg font-light opacity-80 leading-relaxed" data-fade-up>
+                    A rare archetype balancing rigid structural logic with fluid aesthetic expression[cite: 2].
+                </p>
+            </div>
+            
+            <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-50">
+                <span class="text-[10px] uppercase tracking-widest">Scroll</span>
+                <div class="w-px h-12 bg-abyssal-offwhite/50 origin-top animate-pulse"></div>
+            </div>
+        </header>
+
+        <!-- COMPONENT: Archetype Introduction -->
+        <section id="archetype-intro" class="relative z-20 bg-abyssal-obsidian py-32 md:py-48 px-6 border-t border-abyssal-offwhite/5">
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-12">
+                    <h2 class="font-display text-4xl md:text-6xl leading-tight" data-split-text>
+                        Influence is a tool best used to empower others.
+                    </h2>
+                    <p class="text-sm md:text-base font-light opacity-70 leading-relaxed max-w-md" data-fade-up>
+                        Influence is a tool best used to empower others, challenge perspectives, and create meaningful change[cite: 2]. Refusing a fixed category, she allows her digital presence to morph organically based on current intellectual pursuits and artistic evolutions[cite: 2].
+                    </p>
+                    <a href="philosophy.html" data-cursor-magnetic class="inline-flex items-center gap-4 text-xs uppercase tracking-widest border-b border-abyssal-mineral pb-1 hover:text-abyssal-mineral transition-colors">
+                        Explore The Philosophy
+                    </a>
+                </div>
+                
+                <!-- Skewed Image Reveal -->
+                <div class="relative h-[600px] w-full overflow-hidden" data-image-reveal>
+                    <img src="https://images.unsplash.com/photo-1509631179647-0c921adcb584?q=80&w=1000&auto=format&fit=crop" alt="Structural Elegance" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" />
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPONENT: The Crown Jewel (Pageantry Milestones) -->
+        <section id="crown-jewel" class="relative z-20 bg-abyssal-graphite py-32 px-6">
+            <div class="max-w-6xl mx-auto space-y-24">
+                <div class="text-center space-y-6">
+                    <span class="text-xs uppercase tracking-widest opacity-60">The Trajectory</span>
+                    <h2 class="font-display text-4xl md:text-7xl" data-split-text>Sovereign Presence</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Milestone 1 -->
+                    <div class="border-t border-abyssal-offwhite/10 pt-8 space-y-4" data-fade-up>
+                        <span class="text-abyssal-mineral text-sm uppercase tracking-widest">2026</span>
+                        <h3 class="font-display text-2xl">Miss Ethiopia</h3>
+                        <p class="text-sm font-light opacity-70">4th Runner-Up. A testament to composure, grace, and intellect on the national stage.</p>
+                    </div>
+                    
+                    <!-- Milestone 2 -->
+                    <div class="border-t border-abyssal-offwhite/10 pt-8 space-y-4" data-fade-up>
+                        <span class="text-abyssal-mineral text-sm uppercase tracking-widest">Aug 2026</span>
+                        <h3 class="font-display text-2xl">Miss Tourism Ethiopia</h3>
+                        <p class="text-sm font-light opacity-70">Crowned. Representing the cultural heritage and narrative richness of the nation.</p>
+                    </div>
+
+                    <!-- Milestone 3 -->
+                    <div class="border-t border-abyssal-offwhite/10 pt-8 space-y-4" data-fade-up>
+                        <span class="text-abyssal-mineral text-sm uppercase tracking-widest">Sep 2026</span>
+                        <h3 class="font-display text-2xl">Miss Tourism Africa</h3>
+                        <p class="text-sm font-light opacity-70">Nigeria. Preparing to carry the ethos of Ethiopian excellence to the international arena.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPONENT: Global Footer -->
+        <footer id="site-footer" class="bg-abyssal-obsidian py-12 px-6 border-t border-abyssal-offwhite/5 text-center flex flex-col items-center gap-6">
+            <h2 class="font-display text-3xl opacity-50">HERMELA</h2>
+            <p class="text-xs uppercase tracking-widest opacity-40">© 2026 / Architecture of the Mind</p>
+        </footer>
+
+    </main>
+
+    <!-- Dependencies: GSAP Core, GSAP ScrollTrigger, Lenis Smooth Scroll -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+
+    <!-- Application Logic (Architected for clean React/Next.js extraction) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 1. Accessibility Check
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // 2. Lenis Smooth Scroll Initialization
+            let lenis;
+            if (!prefersReducedMotion) {
+                lenis = new Lenis({
+                    duration: 1.2,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo.out
+                    direction: 'vertical',
+                    gestureDirection: 'vertical',
+                    smooth: true,
+                    mouseMultiplier: 1,
+                    smoothTouch: false,
+                    touchMultiplier: 2,
+                    infinite: false,
+                });
+
+                lenis.on('scroll', ScrollTrigger.update);
+                gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+                gsap.ticker.lagSmoothing(0);
+            }
+
+            // 3. UI State Management (Menu Toggle)
+            const menuTrigger = document.querySelector('[data-menu-trigger]');
+            const menuClose = document.querySelector('[data-menu-close]');
+            const fullscreenMenu = document.getElementById('fullscreen-menu');
+            const kineticNav = document.getElementById('kinetic-nav');
+
+            const toggleMenu = (forceState) => {
+                const isOpen = fullscreenMenu.classList.contains('clip-curtain-open');
+                const newState = forceState !== undefined ? forceState : !isOpen;
+                
+                if (newState) {
+                    fullscreenMenu.classList.remove('clip-curtain-closed');
+                    fullscreenMenu.classList.add('clip-curtain-open');
+                    if(lenis) lenis.stop();
+                } else {
+                    fullscreenMenu.classList.remove('clip-curtain-open');
+                    fullscreenMenu.classList.add('clip-curtain-closed');
+                    if(lenis) lenis.start();
+                }
+            };
+
+            if(menuTrigger) menuTrigger.addEventListener('click', () => toggleMenu(true));
+            if(menuClose) menuClose.addEventListener('click', () => toggleMenu(false));
+
+            // 4. Kinetic Navigation (Hide on scroll down, show on scroll up)
+            let lastScrollY = window.scrollY;
+            window.addEventListener('scroll', () => {
+                if (prefersReducedMotion) return;
+                const currentScrollY = window.scrollY;
+                if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                    kineticNav.style.transform = 'translate(-50%, 150%)'; // Hide
+                } else {
+                    kineticNav.style.transform = 'translate(-50%, 0)'; // Show
+                }
+                lastScrollY = currentScrollY;
+            }, { passive: true });
+
+            // 5. Text Splitting Utility (Vanilla JS alternative to SplitText for character animation)
+            const splitTexts = document.querySelectorAll('[data-split-text]');
+            splitTexts.forEach(el => {
+                if(prefersReducedMotion) return;
+                const text = el.innerText;
+                el.innerHTML = '';
+                text.split(' ').forEach(word => {
+                    const wordDiv = document.createElement('span');
+                    wordDiv.classList.add('split-char', 'mx-[0.2em]');
+                    word.split('').forEach(char => {
+                        const charSpan = document.createElement('span');
+                        charSpan.classList.add('split-char-inner');
+                        charSpan.innerText = char;
+                        wordDiv.appendChild(charSpan);
+                    });
+                    el.appendChild(wordDiv);
+                });
+            });
+
+            // 6. GSAP Animations (Wrapped in MatchMedia for safety)
+            let mm = gsap.matchMedia();
+
+            mm.add("(prefers-reduced-motion: no-preference)", () => {
+                
+                // Text Stagger Animations
+                const splitElements = document.querySelectorAll('[data-split-text]');
+                splitElements.forEach(el => {
+                    const chars = el.querySelectorAll('.split-char-inner');
+                    gsap.to(chars, {
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 90%",
+                        },
+                        y: "0%",
+                        duration: 1.2,
+                        stagger: 0.03,
+                        ease: "power3.out"
+                    });
+                });
+
+                // Fade Up Elements
+                const fadeElements = document.querySelectorAll('[data-fade-up]');
+                fadeElements.forEach(el => {
+                    gsap.fromTo(el, 
+                        { y: 40, opacity: 0 },
+                        {
+                            scrollTrigger: {
+                                trigger: el,
+                                start: "top 85%",
+                            },
+                            y: 0,
+                            opacity: 1,
+                            duration: 1.5,
+                            ease: "expo.out"
+                        }
+                    );
+                });
+
+                // Image Parallax Reveal
+                const imageReveals = document.querySelectorAll('[data-image-reveal]');
+                imageReveals.forEach(el => {
+                    const img = el.querySelector('img');
+                    gsap.fromTo(img,
+                        { scale: 1.2, y: "-10%" },
+                        {
+                            scrollTrigger: {
+                                trigger: el,
+                                start: "top bottom",
+                                end: "bottom top",
+                                scrub: true
+                            },
+                            scale: 1,
+                            y: "10%",
+                            ease: "none"
+                        }
+                    );
+                });
+
+                // Hero Parallax Background
+                const heroBg = document.querySelector('[data-parallax-bg]');
+                if (heroBg) {
+                    gsap.to(heroBg, {
+                        scrollTrigger: {
+                            trigger: "#hero-section",
+                            start: "top top",
+                            end: "bottom top",
+                            scrub: true
+                        },
+                        y: "20%",
+                        ease: "none"
+                    });
+                }
+            });
+
+            // 7. Magnetic Button Logic (Desktop only)
+            if (window.innerWidth > 768 && !prefersReducedMotion) {
+                const magneticElements = document.querySelectorAll('[data-cursor-magnetic]');
+                magneticElements.forEach(el => {
+                    el.addEventListener('mousemove', (e) => {
+                        const rect = el.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        
+                        gsap.to(el, {
+                            x: x * 0.4,
+                            y: y * 0.4,
+                            duration: 0.6,
+                            ease: "power3.out"
+                        });
+                    });
+
+                    el.addEventListener('mouseleave', () => {
+                        gsap.to(el, {
+                            x: 0,
+                            y: 0,
+                            duration: 0.6,
+                            ease: "elastic.out(1, 0.3)"
+                        });
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
