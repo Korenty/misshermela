@@ -20,4 +20,6 @@
 **Key Copywriting Anchors:**
 *   "Influence is a tool best used to empower others, challenge perspectives, and create meaningful change"[cite: 2].
 *   "My clothing is an extension of my personality, not just something I wear."[cite: 2]
+*   "Beauty was never meant to be a single definition."[cite: 2]
 *   **Crown Jewels:** Miss Ethiopia 2026 4th Runner-Up, Miss Tourism Ethiopia (Aug 2026), Miss Tourism Africa (Sep 2026).
+*   **The Icons:** Maya Angelou (Wisdom/Connection), Cleopatra (Femininity/Intelligence), Carl Jung (Self-Awareness/Transformation)[cite: 2].
