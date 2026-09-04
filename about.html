@@ -1,75 +1,400 @@
+<!-- about.html -->
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="en" class="antialiased overflow-x-hidden bg-[#0B0B0B]">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hermela | About & Philosophy</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body class="bg-gallery-alabaster text-gallery-charcoal dark:bg-abyssal-void dark:text-abyssal-offwhite transition-colors duration-700 antialiased font-sans selection:bg-gallery-bronze selection:text-white dark:selection:bg-abyssal-oxidized">
-
-  <main class="min-h-screen px-6 py-8 md:px-12 md:py-12 flex flex-col justify-between">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermela | The Biome</title>
     
-    <!-- TOP NAVIGATION -->
-    <header class="flex justify-between items-center z-10 uppercase tracking-widest text-xs md:text-sm font-medium">
-      <div class="flex gap-8">
-        <a href="index.html" class="hover:text-gallery-bronze dark:hover:text-abyssal-oxidized transition-colors">Home</a>
-        <a href="about.html" class="border-b border-gallery-charcoal dark:border-abyssal-offwhite pb-1">About</a>
-        <a href="projects.html" class="hover:text-gallery-bronze dark:hover:text-abyssal-oxidized transition-colors">Works</a>
-      </div>
-      
-      <button id="theme-toggle" class="hover:text-gallery-bronze dark:hover:text-abyssal-oxidized transition-colors duration-300 focus:outline-none">
-        <span class="dark:hidden">Dark Mode</span>
-        <span class="hidden dark:inline">Light Mode</span>
-      </button>
-    </header>
-
-    <!-- CONTENT CONTAINER -->
-    <section class="max-w-4xl mx-auto my-20 z-10 space-y-16">
-      
-      <!-- HEADER STATEMENT -->
-      <div class="space-y-6">
-        <h2 class="font-display text-3xl md:text-5xl">The Intellectual Alchemist</h2>
-        <p class="text-lg md:text-xl font-light leading-relaxed opacity-90">
-          At the intersection of rigid structural logic and fluid aesthetic expression lies a living ecosystem. Beauty and technology are not fixed standards to follow, but mediums to evolve[span_2](start_span)[span_2](end_span).
-        </p>
-      </div>
-
-      <!-- THE CORE PHILOSOPHIES GRID -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-10 border-t border-gallery-charcoal/10 dark:border-abyssal-offwhite/10">
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        abyssal: {
+                            obsidian: '#0B0B0B',
+                            graphite: '#1A1A1A',
+                            mineral: '#8C7A6B',
+                            offwhite: '#EAEAEA',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Fraunces', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        widest: '.25em',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Smooth Scrolling */
+        html.lenis, html.lenis body { height: auto; width: 100vw; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-scroll-container] { will-change: transform; }
         
-        <!-- Morning Ritual -->
-        <div class="space-y-4">
-          <span class="text-xs tracking-widest uppercase opacity-60">01 / The Morning Code</span>
-          <h3 class="font-display text-xl">Presence Before Noise</h3>
-          <p class="text-sm font-light leading-relaxed opacity-80">
-            Every morning begins with movement and intentional reflection. Grounding the self through dance and inner alignment before giving energy to the external world[span_3](start_span)[span_3](end_span).
-          </p>
+        /* Typography & Utilities */
+        .split-char { display: inline-block; overflow: hidden; vertical-align: bottom; }
+        .split-char-inner { display: inline-block; transform: translateY(110%); will-change: transform; }
+        
+        /* Menu State */
+        #fullscreen-menu {
+            clip-path: inset(0 0 100% 0);
+            pointer-events: none;
+            transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        #fullscreen-menu.is-open {
+            clip-path: inset(0 0 0% 0);
+            pointer-events: auto;
+        }
+
+        /* Interactive Icon Accordion (Desktop) */
+        .icon-panel { transition: flex 0.8s cubic-bezier(0.77, 0, 0.175, 1); flex: 1; }
+        .icon-panel:hover { flex: 3; }
+        .icon-panel-content { opacity: 0; transition: opacity 0.5s ease 0.2s; pointer-events: none; }
+        .icon-panel:hover .icon-panel-content { opacity: 1; pointer-events: auto; }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .split-char-inner { transform: translateY(0) !important; }
+            #fullscreen-menu { transition: opacity 0.3s ease; clip-path: none; opacity: 0; }
+            #fullscreen-menu.is-open { opacity: 1; }
+            .icon-panel { flex: 1 !important; }
+            .icon-panel-content { opacity: 1 !important; pointer-events: auto !important; }
+        }
+    </style>
+</head>
+<body class="bg-abyssal-obsidian text-abyssal-offwhite font-sans selection:bg-abyssal-mineral selection:text-abyssal-obsidian overflow-x-hidden">
+
+    <!-- Noise Texture -->
+    <div class="fixed inset-0 z-[100] pointer-events-none opacity-[0.03] mix-blend-screen">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+            <filter id="noise">
+                <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
+            </filter>
+            <rect width="100%" height="100%" filter="url(#noise)"/>
+        </svg>
+    </div>
+
+    <!-- Hybrid Kinetic Nav -->
+    <nav id="kinetic-nav" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 transition-transform duration-500 ease-out">
+        <div class="bg-abyssal-graphite/90 backdrop-blur-xl border border-abyssal-offwhite/10 rounded-full px-8 py-4 flex items-center gap-8 shadow-2xl">
+            <span class="text-[10px] uppercase tracking-widest font-medium opacity-60 hidden md:block">The Biome</span>
+            <div class="w-px h-4 bg-abyssal-offwhite/20 hidden md:block"></div>
+            <button data-menu-trigger class="text-xs uppercase tracking-widest font-medium hover:text-abyssal-mineral transition-colors relative group overflow-hidden">
+                <span class="inline-block transition-transform duration-300 group-hover:-translate-y-full">Explore</span>
+                <span class="inline-block absolute left-0 top-full transition-transform duration-300 group-hover:-translate-y-full text-abyssal-mineral">Explore</span>
+            </button>
         </div>
+    </nav>
 
-        <!-- Foundations -->
-        <div class="space-y-4">
-          <span class="text-xs tracking-widest uppercase opacity-60">02 / Guiding Pillars</span>
-          <h3 class="font-display text-xl">Lineage of Thought</h3>
-          <p class="text-sm font-light leading-relaxed opacity-80">
-            Drawing wisdom from the healing resilience of Maya Angelou, the commanding intellect of Cleopatra, and the deep self-transformation explored by Carl Jung[span_4](start_span)[span_4](end_span).
-          </p>
-        </div>
+    <!-- Fullscreen Menu -->
+    <div id="fullscreen-menu" class="fixed inset-0 z-50 bg-abyssal-graphite flex flex-col justify-center items-center">
+        <button data-menu-close class="absolute top-10 right-10 text-[10px] uppercase tracking-widest hover:text-abyssal-mineral transition-colors">Close ✕</button>
+        <ul class="flex flex-col gap-6 text-center">
+            <li><a href="index.html" class="font-display text-5xl md:text-7xl hover:italic hover:text-abyssal-mineral transition-all">Prologue</a></li>
+            <li><a href="about.html" class="font-display text-5xl md:text-7xl hover:italic hover:text-abyssal-mineral transition-all text-abyssal-mineral">The Biome</a></li>
+            <li><a href="pageantry.html" class="font-display text-5xl md:text-7xl hover:italic hover:text-abyssal-mineral transition-all">The Crown</a></li>
+            <li><a href="intellect.html" class="font-display text-5xl md:text-7xl hover:italic hover:text-abyssal-mineral transition-all">The Architect</a></li>
+            <li><a href="philosophy.html" class="font-display text-5xl md:text-7xl hover:italic hover:text-abyssal-mineral transition-all">The Mind</a></li>
+            <li><a href="gallery.html" class="font-display text-5xl md:text-7xl hover:italic hover:text-abyssal-mineral transition-all">The Muse</a></li>
+        </ul>
+    </div>
 
-      </div>
+    <!-- MAIN APP CONTAINER -->
+    <main id="smooth-wrapper" data-scroll-container>
+        
+        <!-- SECTION 1: Inner Architecture Hero -->
+        <header class="relative min-h-[80vh] md:min-h-screen w-full flex flex-col justify-center px-6 md:px-12 overflow-hidden border-b border-abyssal-offwhite/10">
+            <div class="max-w-screen-2xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-12 items-center relative z-10">
+                <div class="md:col-span-8 space-y-8">
+                    <span class="text-[10px] uppercase tracking-widest opacity-60 block" data-fade-up>The Anatomy of the Alchemist</span>
+                    <h1 class="font-display text-6xl md:text-8xl lg:text-[10rem] leading-[0.9] tracking-tight" data-split-text>
+                        The<br><i class="text-abyssal-mineral">Biome</i>
+                    </h1>
+                </div>
+                <div class="md:col-span-4 flex flex-col gap-8 md:items-end md:text-right" data-fade-up>
+                    <p class="text-sm font-light opacity-80 leading-relaxed max-w-sm">
+                        A 23-year journey synthesizing computer science logic with high-fashion aesthetics. This is the structural foundation of her presence.
+                    </p>
+                    <div class="h-px w-24 bg-abyssal-offwhite/20"></div>
+                </div>
+            </div>
+            
+            <!-- Abstract background shape -->
+            <div class="absolute top-1/2 right-[-10%] -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-abyssal-offwhite/5 opacity-50 pointer-events-none blur-3xl z-0" data-parallax-shape></div>
+        </header>
 
-    </section>
+        <!-- SECTION 2: The Morning Code (Rituals) -->
+        <section class="relative z-10 bg-abyssal-obsidian py-32 md:py-48 px-6 md:px-12">
+            <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 items-center">
+                
+                <!-- Fluid Visual -->
+                <div class="relative h-[60vh] md:h-[80vh] w-full overflow-hidden" data-fade-up>
+                    <img src="https://images.unsplash.com/photo-1512413914595-65377f0c13ee?q=80&w=1200&auto=format&fit=crop" alt="Fluid Morning Movement" class="w-full h-full object-cover grayscale opacity-70 mix-blend-lighten" data-parallax-img />
+                </div>
 
-    <!-- FOOTER -->
-    <footer class="text-center text-xs tracking-widest uppercase opacity-50 py-4">
-      <span>Hermela © 2026</span>
-    </footer>
+                <!-- Text Content -->
+                <div class="space-y-12">
+                    <div class="flex items-center gap-6" data-fade-up>
+                        <span class="text-[10px] uppercase tracking-widest text-abyssal-mineral">Ritual & Discipline</span>
+                        <div class="h-px flex-1 bg-abyssal-offwhite/10"></div>
+                    </div>
+                    <h2 class="font-display text-4xl md:text-5xl lg:text-6xl leading-tight" data-split-text>
+                        "Every morning begins with movement. I dance to reconnect with myself..."
+                    </h2>
+                    <div class="space-y-6 text-sm font-light opacity-70 leading-relaxed" data-fade-up>
+                        <p>
+                            "...awaken my energy, and start the day feeling present before I step into the expectations of the outside world"[cite: 2].
+                        </p>
+                        <p>
+                            Mornings are strictly architected for mental sovereignty. Before managing digital projects or stepping into the high-fashion lens, there is a necessary period of reflection. This time is used to understand thoughts, set intentions, and establish a profound connection with the self before energy is distributed elsewhere[cite: 2].
+                        </p>
+                    </div>
+                </div>
 
-  </main>
+            </div>
+        </section>
 
-  <script src="app.js"></script>
+        <!-- SECTION 3: The Humanity & Womanhood Icons -->
+        <section class="bg-abyssal-graphite border-y border-abyssal-offwhite/10 py-32 md:py-48 flex flex-col h-auto md:h-screen justify-center">
+            <div class="max-w-screen-2xl mx-auto w-full px-6 md:px-12 mb-16 flex flex-col md:flex-row justify-between md:items-end gap-8">
+                <h2 class="font-display text-5xl md:text-7xl leading-none" data-split-text>The<br>Architects</h2>
+                <p class="max-w-sm text-sm font-light opacity-70 leading-relaxed" data-fade-up>
+                    The historic and contemporary figures whose mix of intellect, grace, and unapologetic self-evolution serve as the ultimate blueprint[cite: 2].
+                </p>
+            </div>
+
+            <!-- Interactive Accordion Grid -->
+            <div class="max-w-screen-2xl mx-auto w-full px-6 md:px-12 h-[60vh] flex flex-col md:flex-row gap-4">
+                
+                <!-- Icon 1: Maya Angelou -->
+                <div class="icon-panel relative bg-abyssal-obsidian border border-abyssal-offwhite/10 p-8 flex flex-col justify-end overflow-hidden group cursor-default h-full">
+                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519799276495-2eb4d57c10b7?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-20 grayscale mix-blend-overlay transition-transform duration-1000 group-hover:scale-105"></div>
+                    <div class="relative z-10">
+                        <span class="text-[10px] uppercase tracking-widest text-abyssal-mineral mb-4 block">Wisdom & Connection</span>
+                        <h3 class="font-display text-3xl md:text-4xl mb-6">Maya<br>Angelou</h3>
+                        <div class="icon-panel-content hidden md:block">
+                            <p class="text-xs font-light opacity-80 leading-relaxed max-w-sm">
+                                "She showed the world that our experiences, even the difficult ones, can become sources of wisdom and strength... communication is not just about speaking it is about creating connection and making people feel seen"[cite: 2].
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Icon 2: Cleopatra -->
+                <div class="icon-panel relative bg-abyssal-obsidian border border-abyssal-offwhite/10 p-8 flex flex-col justify-end overflow-hidden group cursor-default h-full">
+                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600861194802-a2b11076bcd8?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-20 grayscale mix-blend-overlay transition-transform duration-1000 group-hover:scale-105"></div>
+                    <div class="relative z-10">
+                        <span class="text-[10px] uppercase tracking-widest text-abyssal-mineral mb-4 block">Femininity & Intelligence</span>
+                        <h3 class="font-display text-3xl md:text-4xl mb-6">Cleopatra</h3>
+                        <div class="icon-panel-content hidden md:block">
+                            <p class="text-xs font-light opacity-80 leading-relaxed max-w-sm">
+                                "She represents the harmony between femininity and intelligence... She reminds me that a woman can embrace her femininity while also being powerful, ambitious, and influential"[cite: 2].
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Icon 3: Carl Jung -->
+                <div class="icon-panel relative bg-abyssal-obsidian border border-abyssal-offwhite/10 p-8 flex flex-col justify-end overflow-hidden group cursor-default h-full">
+                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-20 grayscale mix-blend-overlay transition-transform duration-1000 group-hover:scale-105"></div>
+                    <div class="relative z-10">
+                        <span class="text-[10px] uppercase tracking-widest text-abyssal-mineral mb-4 block">Awareness & Transformation</span>
+                        <h3 class="font-display text-3xl md:text-4xl mb-6">Carl<br>Jung</h3>
+                        <div class="icon-panel-content hidden md:block">
+                            <p class="text-xs font-light opacity-80 leading-relaxed max-w-sm">
+                                "His ideas remind me that true growth begins with understanding ourselves our emotions, experiences, and inner world. This connects deeply with my belief that emotional wellbeing and self-discovery are essential"[cite: 2].
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Mobile Text Fallback (Visible only on small screens) -->
+            <div class="md:hidden px-6 mt-8 space-y-8 text-sm font-light opacity-80">
+                <p><strong class="font-medium text-abyssal-mineral">Maya Angelou:</strong> Experiences into wisdom; communication as connection[cite: 2].</p>
+                <p><strong class="font-medium text-abyssal-mineral">Cleopatra:</strong> The ultimate harmony of femininity, intelligence, and ambition[cite: 2].</p>
+                <p><strong class="font-medium text-abyssal-mineral">Carl Jung:</strong> Self-awareness as the catalyst for total transformation[cite: 2].</p>
+            </div>
+        </section>
+
+        <!-- SECTION 4: The Convergence -->
+        <section class="bg-abyssal-obsidian py-32 px-6 md:px-12 text-center flex flex-col items-center">
+            <h2 class="font-display text-3xl md:text-5xl max-w-4xl leading-tight mb-12" data-split-text>
+                Together, they represent the qualities I aspire to embody: a woman with a strong voice, a curious mind, and the courage to continuously evolve.
+            </h2>
+            <p class="text-[10px] uppercase tracking-widest text-abyssal-mineral mb-12" data-fade-up>[cite: 2]</p>
+            
+            <a href="pageantry.html" class="inline-block border border-abyssal-offwhite/20 px-12 py-5 text-xs uppercase tracking-widest hover:bg-abyssal-offwhite hover:text-abyssal-obsidian transition-colors duration-300" data-fade-up>
+                Witness The Crown
+            </a>
+        </section>
+
+        <!-- Global Footer -->
+        <footer class="bg-abyssal-graphite pt-32 pb-12 px-6 md:px-12 text-center border-t border-abyssal-offwhite/5 flex flex-col items-center">
+            <h2 class="font-display text-6xl md:text-[10rem] uppercase tracking-tighter opacity-20 hover:opacity-100 transition-opacity duration-700 cursor-default">
+                Hermela
+            </h2>
+            <div class="mt-24 flex flex-col md:flex-row items-center justify-between w-full max-w-screen-2xl text-[10px] uppercase tracking-widest opacity-40">
+                <span>© 2026 / Architecture of the Mind</span>
+                <span class="mt-4 md:mt-0">Addis Ababa, Ethiopia</span>
+                <span class="mt-4 md:mt-0">Built with Logic & Fluidity</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // 1. Smooth Scrolling (Lenis)
+            let lenis;
+            if (!prefersReducedMotion) {
+                lenis = new Lenis({
+                    duration: 1.2,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                    direction: 'vertical',
+                    gestureDirection: 'vertical',
+                    smooth: true,
+                });
+                lenis.on('scroll', ScrollTrigger.update);
+                gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+                gsap.ticker.lagSmoothing(0);
+            }
+
+            // 2. Menu Logic
+            const menuTrigger = document.querySelector('[data-menu-trigger]');
+            const menuClose = document.querySelector('[data-menu-close]');
+            const fullscreenMenu = document.getElementById('fullscreen-menu');
+            const kineticNav = document.getElementById('kinetic-nav');
+
+            const toggleMenu = (forceState) => {
+                const isOpen = fullscreenMenu.classList.contains('is-open');
+                const newState = forceState !== undefined ? forceState : !isOpen;
+                
+                if (newState) {
+                    fullscreenMenu.classList.add('is-open');
+                    kineticNav.style.transform = 'translate(-50%, 150%)';
+                    if(lenis) lenis.stop();
+                } else {
+                    fullscreenMenu.classList.remove('is-open');
+                    kineticNav.style.transform = 'translate(-50%, 0)';
+                    if(lenis) lenis.start();
+                }
+            };
+
+            if(menuTrigger) menuTrigger.addEventListener('click', () => toggleMenu(true));
+            if(menuClose) menuClose.addEventListener('click', () => toggleMenu(false));
+
+            // 3. Kinetic Nav Hide/Show
+            let lastScrollY = window.scrollY;
+            window.addEventListener('scroll', () => {
+                if (prefersReducedMotion || fullscreenMenu.classList.contains('is-open')) return;
+                const currentScrollY = window.scrollY;
+                if (currentScrollY > lastScrollY && currentScrollY > 200) {
+                    kineticNav.style.transform = 'translate(-50%, 150%)';
+                } else {
+                    kineticNav.style.transform = 'translate(-50%, 0)';
+                }
+                lastScrollY = currentScrollY;
+            }, { passive: true });
+
+            // 4. Text Splitting Setup
+            if (!prefersReducedMotion) {
+                document.querySelectorAll('[data-split-text]').forEach(el => {
+                    const text = el.innerText;
+                    el.innerHTML = '';
+                    text.split(' ').forEach(word => {
+                        const wordDiv = document.createElement('span');
+                        wordDiv.className = 'split-char mx-[0.15em]';
+                        word.split('').forEach(char => {
+                            const charSpan = document.createElement('span');
+                            charSpan.className = 'split-char-inner';
+                            charSpan.innerText = char;
+                            wordDiv.appendChild(charSpan);
+                        });
+                        el.appendChild(wordDiv);
+                    });
+                });
+            }
+
+            // 5. GSAP Animations
+            let mm = gsap.matchMedia();
+
+            mm.add("(prefers-reduced-motion: no-preference)", () => {
+                // Text Reveals
+                document.querySelectorAll('[data-split-text]').forEach(el => {
+                    const chars = el.querySelectorAll('.split-char-inner');
+                    gsap.to(chars, {
+                        scrollTrigger: { trigger: el, start: "top 90%" },
+                        y: "0%",
+                        duration: 1.2,
+                        stagger: 0.02,
+                        ease: "power3.out"
+                    });
+                });
+
+                // Fade Ups
+                document.querySelectorAll('[data-fade-up]').forEach(el => {
+                    gsap.fromTo(el, 
+                        { y: 30, opacity: 0 },
+                        {
+                            scrollTrigger: { trigger: el, start: "top 85%" },
+                            y: 0, opacity: 1, duration: 1.5, ease: "expo.out"
+                        }
+                    );
+                });
+
+                // Image Parallax Reveal
+                document.querySelectorAll('[data-parallax-img]').forEach(img => {
+                    gsap.fromTo(img,
+                        { y: "-10%", scale: 1.1 },
+                        {
+                            scrollTrigger: {
+                                trigger: img.parentElement,
+                                start: "top bottom",
+                                end: "bottom top",
+                                scrub: true
+                            },
+                            y: "10%", scale: 1, ease: "none"
+                        }
+                    );
+                });
+
+                // Abstract Shape Parallax
+                const shape = document.querySelector('[data-parallax-shape]');
+                if(shape) {
+                    gsap.to(shape, {
+                        scrollTrigger: {
+                            trigger: "header",
+                            start: "top top",
+                            end: "bottom top",
+                            scrub: true
+                        },
+                        y: "30%", rotation: 45, ease: "none"
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
